@@ -36,5 +36,5 @@ if __name__ == "__main__":
     for button in buttons.values():
         GPIO.cleanup(button)
 
-    screen.lcd_display_string("Program exited".center(16))
-    screen.lcd_display_string("Goodbye :)".center(16))
+    screen.lcd_display_string("Program exited".center(16), 1)
+    screen.lcd_display_string("Goodbye :)".center(16), 2)
