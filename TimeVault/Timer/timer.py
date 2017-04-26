@@ -12,7 +12,7 @@ class Timer(CountDown):
         self.buttons = buttons
 
     def change_duration(self, change):
-        if self.duration >= change or change >= 0:
+        if self.duration - change > 0:
             # +- = - so we can safely just do += change
             self.duration += change
         else:

@@ -50,7 +50,7 @@ class CountDown:
         hrs = (remaining % (3600 * 24)) // 3600
         mins = (remaining % 3600) // 60
         s = (remaining % 3600) % 60
-        return "{:02]days {:02}:{:02}:{:02}".format(int(days), int(hrs),
+        return "{:02}days {:02}:{:02}:{:02}".format(int(days), int(hrs),
                                                     int(mins), int(s))
 
     @staticmethod

@@ -1,20 +1,7 @@
-import time
-
 import RPi.GPIO as GPIO
 
 from .Physical import LCD_driver as lcdDriver
 from .Timer.timer import Timer
-
-
-def seconds_to_timestamp(seconds):
-    """Convert seconds into a neatly formatted string.
-    Format: DD:HH:MM
-    Returns: Timestamp string."""
-    days = seconds // (3600*24)
-    hrs = (seconds % (3600*24)) // 3600
-    mins = (seconds % 3600) // 60
-    return "{:02}:{:02}:{:02}".format(int(days), int(hrs), int(mins))
-
 
 buttons = {"start":   6,
            "stop":    5,
