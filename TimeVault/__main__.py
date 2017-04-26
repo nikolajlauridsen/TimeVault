@@ -15,7 +15,9 @@ def seconds_to_timestamp(seconds):
     return "{:02}:{:02}:{:02}".format(int(days), int(hrs), int(mins))
 
 
-buttons = {"d_up":    24,
+buttons = {"start":   6,
+           "stop":    5,
+           "d_up":    24,
            "d_down":  23,
            "hr_up":   27,
            "hr_down": 25,
@@ -39,7 +41,7 @@ if __name__ == "__main__":
     # Main loop
     while True:
         screen.lcd_display_string("Choose time", 1)
-        screen.lcd_display_string(seconds_to_timestamp(duration), 2)
+        screen.lcd_display_string(seconds_to_timestamp(duration).center(16), 2)
 
         if GPIO.event_detected(buttons["d_up"]):
             # One hour is 3200 seconds, so a day is 3200*24
@@ -60,4 +62,11 @@ if __name__ == "__main__":
         if GPIO.event_detected(buttons["mn_down"]):
             duration -= 60
 
+        if GPIO.event_detected(buttons["stop"]):
+            break
+
         time.sleep(0.2)
+
+    # Let's clean up after our self, shall we?
+    for button in buttons.values():
+        GPIO.cleanup(button)
