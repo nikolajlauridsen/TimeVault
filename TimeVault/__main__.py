@@ -7,13 +7,12 @@ from .Physical import LCD_driver as lcdDriver
 
 def seconds_to_timestamp(seconds):
     """Convert seconds into a neatly formatted string.
-    Format: HH:MM:SS
+    Format: DD:HH:MM
     Returns: Timestamp string."""
-    # TODO: Convert to days/hrs/minutes
-    hrs = seconds //3600
+    days = seconds // (3600*24)
+    hrs = (seconds % (3600*24)) // 3600
     mins = (seconds % 3600) // 60
-    s = (seconds % 3600) % 60
-    return "{:02}:{:02}:{:02}".format(int(hrs), int(mins), int(s))
+    return "{:02}:{:02}:{:02}".format(int(days), int(hrs), int(mins))
 
 
 buttons = {"d_up":    24,
