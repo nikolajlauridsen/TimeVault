@@ -48,19 +48,28 @@ if __name__ == "__main__":
             duration += 3600*24
 
         if GPIO.event_detected(buttons["d_down"]):
-            duration -= 3600*24
+            if duration >= 3600*24:
+                duration -= 3600*24
+            else:
+                duration = 0
 
         if GPIO.event_detected(buttons["hr_up"]):
             duration += 3600
 
         if GPIO.event_detected(buttons["hr_down"]):
-            duration -= 3600
+            if duration >= 3600:
+                duration -= 3600
+            else:
+                duration = 0
 
         if GPIO.event_detected(buttons["mn_up"]):
             duration += 60
 
         if GPIO.event_detected(buttons["mn_down"]):
-            duration -= 60
+            if duration > 60:
+                duration -= 60
+            else:
+                duration = 0
 
         if GPIO.event_detected(buttons["stop"]):
             break
@@ -70,3 +79,6 @@ if __name__ == "__main__":
     # Let's clean up after our self, shall we?
     for button in buttons.values():
         GPIO.cleanup(button)
+
+    screen.lcd_display_string("Program exited".center(16))
+    screen.lcd_display_string("Goodbye :)".center(16))
