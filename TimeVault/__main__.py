@@ -30,6 +30,7 @@ if __name__ == "__main__":
     # Run duration menu thus setting the duration
     timer_set = timer.start_duration_menu()
     if timer_set:
+        timer.start()
         # Main timer loop
         while not timer.check_expired():
             screen.lcd_display_string("Waiting...", 1)
