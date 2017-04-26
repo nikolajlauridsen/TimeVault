@@ -3,6 +3,7 @@ import time
 import RPi.GPIO as GPIO
 
 from .Physical import LCD_driver as lcdDriver
+from .Timer.timer import Timer
 
 
 def seconds_to_timestamp(seconds):
@@ -36,45 +37,13 @@ if __name__ == "__main__":
 
     # Initialize objects
     screen = lcdDriver.lcd()
+    timer = Timer(screen, buttons)
 
     duration = 0
     # Main loop
-    while True:
-        screen.lcd_display_string("Choose time", 1)
-        screen.lcd_display_string(seconds_to_timestamp(duration).center(16), 2)
+    timer.start_duration_menu()
 
-        if GPIO.event_detected(buttons["d_up"]):
-            # One hour is 3200 seconds, so a day is 3200*24
-            duration += 3600*24
-
-        if GPIO.event_detected(buttons["d_down"]):
-            if duration >= 3600*24:
-                duration -= 3600*24
-            else:
-                duration = 0
-
-        if GPIO.event_detected(buttons["hr_up"]):
-            duration += 3600
-
-        if GPIO.event_detected(buttons["hr_down"]):
-            if duration >= 3600:
-                duration -= 3600
-            else:
-                duration = 0
-
-        if GPIO.event_detected(buttons["mn_up"]):
-            duration += 60
-
-        if GPIO.event_detected(buttons["mn_down"]):
-            if duration > 60:
-                duration -= 60
-            else:
-                duration = 0
-
-        if GPIO.event_detected(buttons["stop"]):
-            break
-
-        time.sleep(0.2)
+    print(timer.get_remaining_string())
 
     # Let's clean up after our self, shall we?
     for button in buttons.values():
