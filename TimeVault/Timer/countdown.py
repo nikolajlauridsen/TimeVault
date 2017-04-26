@@ -36,16 +36,20 @@ class CountDown:
         else:
             return False
 
-    def get_remaining_string(self):
-        """Get the remaining time as a string representation.
-        Format: HH:MM:SS
-        Returns: Remaining time as a string."""
+    def get_duration(self):
+        """Return the remaining duration in seconds"""
         if not self.paused:
             elapsed = time.time() - self.start_time
         else:
             elapsed = 0
 
-        remaining = self.duration - elapsed
+        return self.duration - elapsed
+
+    def get_remaining_string(self):
+        """Get the remaining time as a string representation.
+        Format: HH:MM:SS
+        Returns: Remaining time as a string."""
+        remaining = self.get_duration()
         days = remaining // (3600 * 24)
         hrs = (remaining % (3600 * 24)) // 3600
         mins = (remaining % 3600) // 60

@@ -31,6 +31,7 @@ if __name__ == "__main__":
     timer.start_duration_menu()
 
     print(timer.get_remaining_string())
+    print("Which is {} seconds".format(int(timer.get_duration())))
 
     # Let's clean up after our self, shall we?
     for button in buttons.values():
