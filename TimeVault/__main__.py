@@ -27,7 +27,7 @@ if __name__ == "__main__":
     # Set up channels
     GPIO.setmode(GPIO.BCM)
     # Buttons
-    for button in buttons.keys():
+    for button in buttons.values():
         # Setup input
         GPIO.setup(button, GPIO.IN, pull_up_down=GPIO.PUD_UP)
         # And event detection
