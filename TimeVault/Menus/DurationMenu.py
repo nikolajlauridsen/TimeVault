@@ -20,6 +20,7 @@ class DurationMenu:
             self.timer.start()
             print("Locking and starting timer")  # TODO: Lock the chest
             # Wait for the timer
+            self.screen.lcd_clear()
             while not self.timer.expired():
                 self.screen.lcd_display_string("Waiting...", 1)
                 self.screen.lcd_display_string(self.timer.get_remaining_string(), 2)
