@@ -3,6 +3,7 @@ import time
 
 from .Physical import LCD_driver as lcdDriver
 from .Menus.DurationMenu import DurationMenu
+from .Menus.DateMenu import DateMenu
 
 buttons = {"start":   6,
            "stop":    5,
@@ -25,7 +26,7 @@ if __name__ == "__main__":
 
     # Initialize objects
     screen = lcdDriver.lcd()
-    menu = [DurationMenu(screen, buttons)]
+    menu = [DurationMenu(screen, buttons), DateMenu(screen, buttons)]
     # Cursor for the menu
     cursor = 0
 
