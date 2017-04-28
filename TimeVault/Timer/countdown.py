@@ -66,4 +66,3 @@ class CountDown:
         hrs = (seconds % (3600 * 24)) // 3600
         mins = (seconds % 3600) // 60
         return "{:02}:{:02}:{:02}".format(int(days), int(hrs), int(mins))
-

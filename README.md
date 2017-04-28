@@ -8,6 +8,8 @@ Really good for:
 
 
 # Todo because I forget easily
+* Get a servo and actually make it lock/unlock something
+* Build the box to lock
 * Add a red and green LED signaling locked/unlocked
 * Create a menu system
 * Create a mode where the user picks a date and time the box unlocks
