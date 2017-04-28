@@ -31,7 +31,7 @@ class DatePicker:
             date = "{:02}/{:02}/{:04}".format(day, month, year)
             # Update screen
             self.screen.lcd_display_string("Choose date".center(16), 1)
-            self.screen.lcd_display_string(date.center(16))
+            self.screen.lcd_display_string(date.center(16), 2)
 
             if GPIO.event_detected(self.buttons["d_up"]):
                 day += 1
@@ -120,4 +120,4 @@ class DatePicker:
         if self.unix:
             return self.unix
         else:
-            raise NotInitializedError("DatePicker not properly initialized")
+            raise NotInitializedError("date_picker not properly initialized")
