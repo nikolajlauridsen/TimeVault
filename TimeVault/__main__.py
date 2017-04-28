@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 from .Physical import LCD_driver as lcdDriver
-from .Timer.timer import Timer
+from .Menus.DurationMenu import DurationMenu
 
 buttons = {"start":   6,
            "stop":    5,
@@ -25,23 +25,34 @@ if __name__ == "__main__":
 
     # Initialize objects
     screen = lcdDriver.lcd()
-    timer = Timer(screen, buttons)
+    menu = [DurationMenu(screen, buttons)]
+    # Cursor for the menu
+    cursor = 0
 
-    # Run duration menu thus setting the duration
-    timer_set = timer.start_duration_menu()
-    if timer_set:
-        timer.start()
-        # Main timer loop
-        while not timer.check_expired():
-            screen.lcd_display_string("Waiting...", 1)
-            screen.lcd_display_string(timer.get_remaining_string(), 2)
+    # Main loop
+    while True:
+        screen.lcd_display_string("Choose mode".center(16), 1)
+        screen.lcd_display_string(str(menu[cursor]).center(16), 2)
 
-            if GPIO.event_detected(buttons["stop"]):
-                print("Timer stopped")
-                break
-            time.sleep(0.2)
-    else:
-        print("Please choose a duration")
+        if GPIO.event_detected(buttons['d_down']):
+            if cursor > 0:
+                cursor -= 1
+            else:
+                cursor = len(menu) - 1
+
+        elif GPIO.event_detected(buttons['hr_down']):
+            if cursor < len(menu) - 1:
+                cursor += 1
+            else:
+                cursor = 0
+
+        elif GPIO.event_detected(buttons['start']):
+            menu[cursor].run()
+
+        elif GPIO.event_detected(buttons['stop']):
+            break
+
+        time.sleep(0.2)
 
     # Let's clean up after our self, shall we?
     for button in buttons.values():

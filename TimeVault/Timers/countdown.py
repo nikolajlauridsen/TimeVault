@@ -25,7 +25,13 @@ class CountDown:
         self.duration -= (time.time() - self.start_time)
         self.paused = True
 
-    def check_expired(self):
+    def reset(self):
+        """Reset the countdown"""
+        self.paused = True
+        self.start_time = 0
+        self.duration = 0
+
+    def expired(self):
         """Check whether the countdown timer has expired.
         Returns: True/False"""
         if not self.paused:
@@ -66,4 +72,3 @@ class CountDown:
         hrs = (seconds % (3600 * 24)) // 3600
         mins = (seconds % 3600) // 60
         return "{:02}:{:02}:{:02}".format(int(days), int(hrs), int(mins))
-

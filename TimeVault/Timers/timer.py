@@ -17,9 +17,16 @@ class Timer(CountDown):
             self.duration += change
         else:
             self.duration = 0
+    
+    def reset(self):
+        """Reset the timer"""
+        super(Timer, self).reset()
+        self.screen.lcd_clear()
 
     def start_duration_menu(self):
         """Run the duration menu and sets the duration"""
+        self.reset()
+        self.screen.lcd_clear()
         while True:
             self.screen.lcd_display_string("Choose time", 1)
             self.screen.lcd_display_string(
