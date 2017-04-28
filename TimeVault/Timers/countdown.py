@@ -25,7 +25,7 @@ class CountDown:
         self.duration -= (time.time() - self.start_time)
         self.paused = True
 
-    def check_expired(self):
+    def expired(self):
         """Check whether the countdown timer has expired.
         Returns: True/False"""
         if not self.paused:
