@@ -28,8 +28,8 @@ class DateMenu:
         print("Locking box")
         self.screen.lcd_clear()
         while not self.waiter.expired():
-            self.screen.lcd_display_stromg("Locked".center(16))
-            self.screen.lcd_display_stromg(self.waiter.get_remaining_stamp())
+            self.screen.lcd_display_string("Locked".center(16), 1)
+            self.screen.lcd_display_string(self.waiter.get_remaining_stamp(), 2)
 
             if GPIO.event_detected(self.buttons["stop"]):
                 print("Box manually opened")
