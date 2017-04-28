@@ -102,7 +102,12 @@ class DatePicker:
     def pick_datetime(self):
         """Prompt the user to select a datetime and sets unix"""
         self.pick_date()
-        self.pick_time()
+        if self.date:
+            self.pick_time()
+        else:
+            # User stopped prematurely, reset unix and step out of method
+            self.unix = None
+            return
 
         if self.date and self.time:
             stamp = self.date + " " + self.time
