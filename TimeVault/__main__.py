@@ -2,7 +2,7 @@ import RPi.GPIO as GPIO
 import time
 
 from .Physical import LCD_driver as lcdDriver
-from .Timer.timer import Timer
+from .Timers.timer import Timer
 
 buttons = {"start":   6,
            "stop":    5,

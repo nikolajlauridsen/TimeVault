@@ -9,7 +9,7 @@ class Waiter:
         self.endTime = 0
 
     def set_end_time(self, end):
-        """Set the expiration time as a UNIX timestamp"""
+        """Set the expiration time as a UNIX stamp"""
         self.endTime = end
 
     def expired(self):
@@ -28,7 +28,10 @@ class Waiter:
             return 0
 
     def get_remaining_stamp(self):
-        """Get the remaining time as a timestamp"""
+        """
+        Get the remaining time as a timestamp, format:
+        d/m/Y H:M
+        """
         return self.convert_seconds(self.get_remaining())
 
     def get_end_stamp(self):
