@@ -73,8 +73,8 @@ class DatePicker:
         while True:
             # Update stamp and screen
             stamp = "{:02}:{:02}".format(hr, mn)
-            self.screen.lcd_display_string("Choose time".center(16))
-            self.screen.lcd_display_string(stamp.center(16))
+            self.screen.lcd_display_string("Choose time".center(16), 1)
+            self.screen.lcd_display_string(stamp.center(16), 2)
 
             if GPIO.event_detected(self.buttons["d_up"]):
                 hr += 1
