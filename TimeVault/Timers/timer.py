@@ -20,7 +20,7 @@ class Timer(CountDown):
     
     def reset(self):
         """Reset the timer"""
-        super(self).reset()
+        super(Timer, self).reset()
         self.screen.lcd_clear()
 
     def start_duration_menu(self):
