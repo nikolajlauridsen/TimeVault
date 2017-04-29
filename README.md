@@ -11,6 +11,6 @@ Really good for:
 * Get a servo and actually make it lock/unlock something
 * Build the box to lock
 * Add a red and green LED signaling locked/unlocked
-* Create a menu system
-* Create a mode where the user picks a date and time the box unlocks
+* ~~Create a menu system~~
+* ~~Create a mode where the user picks a date and time the box unlocks~~
 * Stuff I haven't come up with yet
