@@ -2,7 +2,9 @@ import RPi.GPIO as GPIO
 import time
 
 from .Physical import LCD_driver as lcdDriver
+from .Physical.Lock import Lock
 from .Menus.DurationMenu import DurationMenu
+from .Menus.DateMenu import DateMenu
 
 buttons = {"start":   6,
            "stop":    5,
@@ -25,7 +27,9 @@ if __name__ == "__main__":
 
     # Initialize objects
     screen = lcdDriver.lcd()
-    menu = [DurationMenu(screen, buttons)]
+    lock = Lock()
+    menu = [DurationMenu(screen, buttons, lock),
+            DateMenu(screen, buttons, lock)]
     # Cursor for the menu
     cursor = 0
 

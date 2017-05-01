@@ -25,31 +25,47 @@ class DatePicker:
         day = int(convert_unix(_time, "%d"))
         month = int(convert_unix(_time, "%m"))
         year = int(convert_unix(_time, "%Y"))
+        current_year = year
 
         # Main loop
         while True:
             date = "{:02}/{:02}/{:04}".format(day, month, year)
             # Update screen
             self.screen.lcd_display_string("Choose date".center(16), 1)
-            self.screen.lcd_display_string(date.center(16))
+            self.screen.lcd_display_string(date.center(16), 2)
 
             if GPIO.event_detected(self.buttons["d_up"]):
-                day += 1
+                if day < 32:  # TODO: Usual actual max day of month
+                    day += 1
+                else:
+                    day = 32
 
             if GPIO.event_detected(self.buttons["d_down"]):
-                day -= 1
+                if day > 1:
+                    day -= 1
+                else:
+                    day = 32  # TODO: Usual actual max day of month
 
             if GPIO.event_detected(self.buttons["hr_up"]):
-                month += 1
+                if month < 12:
+                    month += 1
+                else:
+                    month = 1
 
             if GPIO.event_detected(self.buttons["hr_down"]):
-                month -= 1
+                if month > 1:
+                    month -= 1
+                else:
+                    month = 12
 
             if GPIO.event_detected(self.buttons["mn_up"]):
                 year += 1
 
             if GPIO.event_detected(self.buttons["mn_down"]):
-                year -= 1
+                if year > current_year:
+                    year -= 1
+                else:
+                    year = current_year
 
             if GPIO.event_detected(self.buttons["start"]):
                 self.date = date
@@ -73,20 +89,32 @@ class DatePicker:
         while True:
             # Update stamp and screen
             stamp = "{:02}:{:02}".format(hr, mn)
-            self.screen.lcd_display_string("Choose time".center(16))
-            self.screen.lcd_display_string(stamp.center(16))
+            self.screen.lcd_display_string("Choose time".center(16), 1)
+            self.screen.lcd_display_string(stamp.center(16), 2)
 
             if GPIO.event_detected(self.buttons["d_up"]):
-                hr += 1
+                if hr < 23:
+                    hr += 1
+                else:
+                    hr = 0
 
             if GPIO.event_detected(self.buttons["d_down"]):
-                hr -= 1
+                if hr > 0:
+                    hr -= 1
+                else:
+                    hr = 23
 
             if GPIO.event_detected(self.buttons["hr_up"]):
-                mn += 1
+                if mn < 59:
+                    mn += 1
+                else:
+                    mn = 0
 
             if GPIO.event_detected(self.buttons["hr_down"]):
-                mn -= 1
+                if mn > 0:
+                    mn -= 1
+                else:
+                    mn = 59
 
             if GPIO.event_detected(self.buttons["start"]):
                 self.time = stamp
@@ -120,4 +148,4 @@ class DatePicker:
         if self.unix:
             return self.unix
         else:
-            raise NotInitializedError("DatePicker not properly initialized")
+            raise NotInitializedError("date_picker not properly initialized")
