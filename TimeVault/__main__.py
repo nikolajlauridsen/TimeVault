@@ -28,7 +28,8 @@ if __name__ == "__main__":
     # Initialize objects
     screen = lcdDriver.lcd()
     lock = Lock()
-    menu = [DurationMenu(screen, buttons, lock), DateMenu(screen, buttons)]
+    menu = [DurationMenu(screen, buttons, lock),
+            DateMenu(screen, buttons, lock)]
     # Cursor for the menu
     cursor = 0
 
