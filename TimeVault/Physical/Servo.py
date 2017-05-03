@@ -12,13 +12,21 @@ class Servo:
 
     def set_position(self, angle):
         """Set the position of the servo"""
-        duty = float(100 * (angle / 180))
-        if duty == 100:
-            # My servo freaks out at 100, so minus it with one
-            # This doesn't seem to change the final position either
-            duty -= 1
-        if duty == 0:
-            # Same goes for 0
-            duty += 1
-
+        duty = self.mapvalue(angle, 0, 180, 2.4, 11)
+        print("Lock:\tDuty:" + str(duty))
         self.pwm.ChangeDutyCycle(duty)
+
+    @staticmethod
+    def mapvalue(value, leftMin, leftMax, rightMin, rightMax):
+        """Maps one range to another.
+        Code taken from:
+        http://stackoverflow.com/questions/1969240/mapping-a-range-of-values-to-another"""
+        # Figure out how 'wide' each range is
+        leftSpan = leftMax - leftMin
+        rightSpan = rightMax - rightMin
+
+        # Convert the left range into a 0-1 range (float)
+        valueScaled = float(value - leftMin) / float(leftSpan)
+
+        # Convert the 0-1 range into a value in the right range.
+        return rightMin + (valueScaled * rightSpan)
