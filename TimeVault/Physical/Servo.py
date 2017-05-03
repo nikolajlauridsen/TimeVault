@@ -7,7 +7,7 @@ class Servo:
     """Control a servo"""
     def __init__(self):
         GPIO.setup(18, GPIO.OUT)
-        self.pwm = GPIO.PWM(18, 100)
+        self.pwm = GPIO.PWM(18, 50)
         self.pwm.start(1)
 
     def set_position(self, angle):
