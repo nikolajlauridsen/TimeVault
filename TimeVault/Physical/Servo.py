@@ -13,4 +13,12 @@ class Servo:
     def set_position(self, angle):
         """Set the position of the servo"""
         duty = float(100 * (angle / 180))
+        if duty == 100:
+            # My servo freaks out at 100, so minus it with one
+            # This doesn't seem to change the final position either
+            duty -= 1
+        if duty == 0:
+            # Same goes for 0
+            duty += 1
+
         self.pwm.ChangeDutyCycle(duty)
