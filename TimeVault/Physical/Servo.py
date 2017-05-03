@@ -5,14 +5,16 @@ SERVO_PIN = 18
 
 class Servo:
     """Control a servo"""
-    def __init__(self):
+    def __init__(self, low=2.4, high=11):
         GPIO.setup(18, GPIO.OUT)
         self.pwm = GPIO.PWM(18, 50)
-        self.pwm.start(1)
+        self.pwm.start(2.4)
+        self.low = low
+        self.high = high
 
     def set_position(self, angle):
         """Set the position of the servo"""
-        duty = self.mapvalue(angle, 0, 180, 2.4, 11)
+        duty = self.mapvalue(angle, 0, 180, self.low, self.high)
         print("Lock:\tDuty:" + str(duty))
         self.pwm.ChangeDutyCycle(duty)
 
